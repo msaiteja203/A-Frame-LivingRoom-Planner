@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+	<title>Blink-Teleportation Component PART 2</title>
+	<script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <!-- ******** NEW LOOK-AT COMPONENT VERSION FOR A-FRAME v1.4.2 ******** -->
+	<script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+	<script src="L49-JS/L49-javascript-END.js"></script>
+</head>
+ 
+<body>
+    <!-- ******** For the code below, NOTHING HAS CHANGED WITH v1.4.2 ******** -->
+    <!-- ******** With A-Frame v1.4.2 you don't need to install the animation component anymore as it is part of the core library ******** -->
+	<a-scene background="color: #FFFFFF">
+		<!-- ASSET MANAGEMENT SYSTEM -->
+		<a-assets>
+			<img id="footsteps" src="L49-ASSETs/footsteps.png">
+		</a-assets>
+		
+		<!-- RED BOX | BLINK-TELEPORTATION ENTITY -->
+		<a-box color="#AA0000" position="-3 0.5 4" class="clickable"
+			   blink-teleportation="pos: -2 0 4">
+		</a-box>
+		
+		<!-- GREEN BOX | BLINK-TELEPORTATION ENTITY | WILL BE HIDDEN AFTER CLICK -->
+		<a-box color="#00AA00" position="3 0.5 4" class="clickable"
+			   blink-teleportation="pos: 2 0 4; hide: true">
+		</a-box>
+		
+		<!-- YELLOW BOX -->
+		<a-box color="#FFAA00" position="-3 0.5 -4">
+		</a-box>
+		<!-- BLINK-TELEPORTATION ENTITY | WILL BE HIDDEN AFTER CLICK -->
+		<a-image src="#footsteps" position="-3 2.5 -4" look-at="#camera" class="clickable"
+				 blink-teleportation="pos: -2 0 -4; hide: true">
+		</a-image>
+		
+		<!-- BLUE BOX -->
+		<a-box color="#0077FF" position="3 0.5 -4">
+		</a-box>
+		<!-- BLINK-TELEPORTATION ENTITY -->
+		<a-image src="#footsteps" position="3 2.5 -4" look-at="#camera" class="clickable"
+				 blink-teleportation="pos: 2 0 -4">
+		</a-image>
+		
+		<!-- GROUND -->
+		<a-plane color="#DDDDDD" shader="flat" rotation="-90 0 0" scale="16 16 1">
+		</a-plane>
+		
+		<!-- ******************************************************************
+		IMPORTANT: This code has to be placed at the bottom of the HTML markup
+				       because of A-Frame's order-dependent rendering.
+               ALSO, we are creating and nesting the a-cursor programmatically
+               to set the correct order (see custom component in JS file).
+		******************************************************************* -->
+		<!-- CAMERA RIG -->
+		<a-entity id="cameraRig" position="0 0 12">
+			<!-- CAMERA -->
+			<a-camera id="camera" wasd-controls-enabled="false">
+			</a-camera>
+		</a-entity>
+		<!-- ************************************************************** -->
+	</a-scene>
+</body>
+</html>

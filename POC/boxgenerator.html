@@ -1,0 +1,74 @@
+<html>
+  <head>
+    <title>POC-Two</title>
+    <script src="https://aframe.io/releases/1.0.0/aframe.min.js"></script>
+    <!-- To work on Events -->
+    <script src="https://unpkg.com/aframe-event-set-component@^4.0.0/dist/aframe-event-set-component.min.js"></script>
+    <!-- If we want to use Physics in our project we need to add this script -->
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v3.13.1/dist/aframe-extras.min.js"></script>
+    <!-- To more interact with the objects in our seen -->
+    <script src="https://unpkg.com/super-hands@2.1.0/dist/super-hands.min.js"></script>
+  </head>
+  <body>
+    <!-- a-scene with out gravity -->
+    <a-scene physics="gravity:-9.8
+    " progressive-controls>
+        <!-- A-scene with Gravity -->
+    <!-- <a-scene progressive-controls physics="gravity: -9.8"> -->
+      <!-- Assets management System -->
+      <a-assets>
+        <img id="sky" src="L12-IMGs/clear-sunny-sky.jpg" />
+        <img id="plane" src="../POC's/3rd Section/floor-1024.jpg" />
+        <img id="floor" src="https://th.bing.com/th?id=OIP.k_DbZrHOKnDNGtoGwSNtpAHaE7&w=306&h=204&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2"/>
+        <img id="wall" src="https://www.bing.com/th?id=OIP.DjyPpf68OPLEgEAf64E19AHaHa&w=146&h=146&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2"/>
+      </a-assets>
+ 
+      <!-- Sky -->
+      <a-sky src="#sky"></a-sky>
+ 
+        <a-camera>
+            <a-entity cursor position="0 0 -1" geometry="primitive: ring"  scale="0.015 0.015 0.015"  material="color: black; shader: flat">
+            </a-entity>
+            <a-animation attribute="scale"
+            to="0.001 0.001 0.001"
+            dur="1000"
+            begin="cursor-fusing"
+            fill="backwards"
+            easing="ease-in">
+          </animation>
+        </a-camera>
+ 
+      <!-- Environment /Walls-->
+      <!-- Back wall -->
+      <a-box  src="#wall" repeat="4 4"  color="#E8E8E8"  position="0 1.7 -5.5" scale="4 3.5 0.1" static-body >
+      </a-box>
+      <!-- Right wall -->
+      <a-box  position="2 1.7 -4" scale="3 3.5 0.1" rotation=" 0 -90 0 " src="#wall" repeat="4 4" color="#E8E8E8" static-body>
+        <!-- <a-box color="red"  scale="1 1 0.1" position="-0 -0 1" static-body>
+        </a-box> -->
+      </a-box>
+      <!-- Left wall -->
+      <a-box position="-2 1.7 -4" scale="3 3.5 0.1" rotation=" 0 -270 0" src="#wall" repeat="4 4" color="#E8E8E8" static-body>
+      </a-box>
+      <!-- Floor -->
+      <a-plane src="#floor" repeat="4 4"  position="0 0 -4"  rotation="-90 0 0" scale="4 3 0.1" static-body>
+      </a-plane>
+ 
+      <!-- Objects -->
+     
+      <!-- box with grabbable, physics and it is not passing trough walls -->
+      <!-- <a-box scale="0.5 0.5 0.5" position="0 2 -5" color="#333333" grabbable dynamic-body
+      event-set__enter="_event: mouseenter; opacity:0.5"
+      event-set__leave="_event: mouseleave; material.color: #333333; opacity: 1"></a-box> -->
+ 
+      <!-- box with grabbable and it is passing through walls-->
+      <a-box scale="0.5 0.5 0.5" position="0 2 -5" color="#333333" grabbable dynamic-body
+      event-set__enter="_event: mouseenter; opacity:0.5"
+      event-set__leave="_event: mouseleave; material.color: #333333; opacity: 1"></a-box>
+ 
+      <a-sphere color="#333333" position="1 1 -5" radius="0.27" draggable d
+      event-set__enter="_event: mouseenter; opacity:0.5"
+      event-set__leave="_event: mouseleave; material.color: #333333; opacity: 1" ></a-sphere>
+    </a-scene>
+  </body>
+</html>

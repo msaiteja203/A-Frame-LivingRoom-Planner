@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+
+</head>
+
+<body>
+    <a-scene>
+        <a-assets>
+            <img id="first" src="L09-IMGs/L09-img-1024x768-flat.jpg">
+            <img id="second" src="L09-IMGs/L09-img-1024x768-curved.jpg">
+            <img id="L09-img-03" src="L09-IMGs/L09-img-1024x768-curved-layout-R.jpg">
+            <img id="L09-img-04" src="L09-IMGs/L09-img-1024x768-curved-layout-C.jpg">
+            <img id="L09-img-05" src="L09-IMGs/L09-img-1024x768-curved-layout-L.jpg">
+        </a-assets>
+        <!-- img primituve img size 1025 * 768px
+        image width(px) = width(m)/image width(px) * image height
+        image width(px) = 1meter -->
+        <a-image src="#first" position="0 1.5 -3" width="1" height="0.75" scale="3 3 1">
+        </a-image>
+
+        <!--  curved image primitive | single image | image size 1024 * 768px
+            radius of arc = 1m
+            length of arc = 1.111m
+            width of arc = 1m
+            angle subtended by arc  = 90 degree
+            img ht = width(m) / img width(px) * image ht(px) -->
+        <a-curvedimage src="#second" theta-length="90" theta-start="135" radius="0.707" height="0.833"
+            position="0 1.5 0" scale="3 3 3">
+        </a-curvedimage>
+        <!-- Width of Arc Reference -->
+        <a-box color="#AA0000" opacity="0.5" width="3" height="0.1" depth="3" position="0 1.5 -1.5">
+        </a-box>
+        <!-- Curved Image Primitive | 3-IMG LAYOUT | IMG size 1024x768 px -->
+        <!-- ? Radius of Arc -->
+        <!-- Width of Arc DIAMETER = 1 m -->
+        <!-- Length of Each IMG = 0.436 m -->
+        <!-- Angle Subtended by Arc = 180 deg -->
+        <!-- Angle Subtended by Each IMG = 50 deg -->
+        <!-- ? IMG height (m) = width (m)/IMG width (px) * IMG height (px) -->
+        <!-- RIGHT IMG -->
+        <a-curvedimage src="#L09-img-03" theta-length="50" theta-start="90" radius="0.5" height="0.327"
+            position="0 1.5 0" scale="3 3 3">
+        </a-curvedimage>
+        <!-- CENTER IMG -->
+        <a-curvedimage src="#L09-img-04" theta-length="50" theta-start="155" radius="0.5" height="0.327"
+            position="0 1.5 0" scale="3 3 3">
+        </a-curvedimage>
+        <!-- LEFT IMG -->
+        <a-curvedimage src="#L09-img-05" theta-length="50" theta-start="220" radius="0.5" height="0.327"
+            position="0 1.5 0" scale="3 3 3">
+        </a-curvedimage>
+    </a-scene>
+</body>
+
+</html>

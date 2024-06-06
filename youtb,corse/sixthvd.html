@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interacting with object youtube video reference</title>
+    <script src="https://aframe.io/releases/0.8.0/aframe.min.js"></script>
+ 
+</head>
+<body>
+    <a-scene>
+        <a-assets>
+            <img id="texture" src="/materials/L08 - Image textures and materials CODE v1.4.2/L08-IMGs/brick-1024.jpg" />
+        </a-assets>
+ 
+        <a-box width="1" height="1" depth="1"
+               position=" 0 0 0"
+               rotation="45 45 45"
+               scale="1 2.5 1"
+               src="#texture">
+            <a-animation attribute="rotation"
+                         begin="click"
+                         repeat="indefinite"
+                         to="0 360 0"></a-animation>
+        </a-box>
+ 
+        <a-camera position="0 7 5">
+            <a-cursor color="#FF0000"></a-cursor>
+        </a-camera>
+ 
+        <script>
+            var box = document.querySelector('a-box');
+            box.addEventListener('mouseenter', function(){
+                box.setAttribute("scale",
+                {
+                    x: 0.5,
+                    y:2,
+                    z: 5.0
+                });
+            });
+        </script> 
+    </a-scene>
+</body>
+</html>

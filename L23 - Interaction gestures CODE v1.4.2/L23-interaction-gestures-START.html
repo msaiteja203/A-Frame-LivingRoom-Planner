@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+    <head>
+        <title>L23 - Interaction gestures</title>
+        <script src="https://aframe.io/releases/0.7.1/aframe.min.js"></script>
+        <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
+        <script src="https://unpkg.com/super-hands@2.1.0/dist/super-hands.min.js"></script>
+    </head>
+    <body>
+        <a-scene>
+
+        <a-entity progressive-controls></a-entity>
+
+        <!-- Red Box -->
+        <a-box color="#AA0000" position="-1.5 0 -7">
+        </a-box>
+
+        <!-- Green Box -->
+        <a-box id="green"
+               color="#00AA00" position="-1.5 3 -7">
+        </a-box>
+
+        <!-- Yellow Box -->
+        <a-box color="#FFAA00" position="1.5 3 -7">
+        </a-box>
+
+        <!-- Blue Box -->
+        <a-box id="blue"
+               color="#00AAFF" position="1.5 0 -7">
+        </a-box>
+
+        </a-scene>
+    </body>
+</html>

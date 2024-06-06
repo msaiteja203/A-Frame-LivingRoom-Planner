@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+ 
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+ 
+    <script
+        src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.0.1/dist/aframe-physics-system.min.js"></script>
+    <script src="https://unpkg.com/super-hands@^3.0.3/dist/super-hands.min.js"></script>
+ 
+ 
+    <!-- <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+ To work on Events -->
+    <!-- <script src="https://unpkg.com/aframe-event-set-component@^4.0.0/dist/aframe-event-set-component.min.js"></script> -->
+    <!-- If we want to use Physics in our project we need to add this script -->
+    <!-- <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v3.13.1/dist/aframe-extras.min.js"></script> -->
+    <!-- To more interact with the objects in our seen -->
+    <!-- <script src="https://unpkg.com/super-hands@2.1.0/dist/super-hands.min.js"></script> --> -->
+    <script src="physics.js"></script>
+</head>
+<body>
+    <a-scene id="scene" physics="debug:true">
+        <a-camera><a-cursor></a-cursor></a-camera>
+        <a-plane static-body color="grey" rotation="-90 0 0" scale="15 15 15"></a-plane>
+        <a-box spheregenerator dynamic-body color="red" scale="0.5 0.5 0.5"- position="2 0.2 -4"></a-box>
+    </a-scene>
+   
+</body>
+</html>

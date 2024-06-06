@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+	<title>Navigation Meshes</title>
+	<script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+    <!-- ******** NEW AFRAME-EXTRAS VERSION FOR A-FRAME v1.4.2 ******** -->
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.0.0/dist/aframe-extras.min.js"></script>
+    <script src="https://recast-api.donmccurdy.com/aframe-inspector-plugin-recast.js"></script>
+    <!-- ******** Unfortunately, the lack of a stable and documented build of the Recast library for WASM
+                  has become a show-stopper, and the creator Don McCurdy can no longer maintain this project.
+                  If a new build of Recast becomes available on NPM, supporting Node.js v14+, and is actively maintained,
+                  he may be able to revive this. Until then, I cannot work on the project further.
+                  Further info at this link: https://github.com/donmccurdy/aframe-inspector-plugin-recast/issues/48
+    ******** -->
+    <!-- ******** THIS MEANS THAT NAVIGATION MESHES STILL WORK IN A-FRAME!
+                  YOU WILL JUST NEED TO CREATE THEM IN BLENDER (RATHER THEN USING THE A-FRAME INSPECTOR)
+                  AND THEN IMPORT THEM AS AN ASSET, JUST LIKE I DID IN THIS EXAMPLE.
+    ******** -->
+</head>
+
+<body>
+    <!-- ******** For the code below, NOTHING HAS CHANGED WITH v1.4.2 ******** -->
+	<a-scene background="color: #FFFFFF" inspector-plugin-recast>
+		<!-- Asset Management System -->
+		<a-assets>
+			<a-asset-item id="my-nav-mesh" src="L37-ASSETs/navmesh.gltf"></a-asset-item>
+		</a-assets>
+		
+		<!-- Camera Rig -->
+		<a-entity movement-controls="speed: 0.15; constrainToNavMesh: true" position="0 0 2">
+			<!-- Camera -->
+			<a-entity camera position="0 1.6 0"
+					  look-controls="pointerLockEnabled: true">
+				<a-cursor></a-cursor>
+			</a-entity>
+		</a-entity>
+		
+		<!-- Ground -->
+		<a-plane color="#333333" shader="flat" rotation="-90 0 0" scale="8 6 1">
+		</a-plane>
+		<!-- Navigation Mesh -->
+		<a-entity gltf-model="#my-nav-mesh" nav-mesh position="0 -0.1 0" visible="false">
+		</a-entity>
+
+		<!-- Cylinder -->
+		<a-cylinder color="#AA0000" radius="0.5" position="1.5 0.5 0">
+		</a-cylinder>
+
+		<!-- Box -->
+		<a-box color="#00AA00" width="0.5" depth="3" position="-1.5 0.5 0">
+		</a-box>
+	</a-scene>
+</body>
+</html>

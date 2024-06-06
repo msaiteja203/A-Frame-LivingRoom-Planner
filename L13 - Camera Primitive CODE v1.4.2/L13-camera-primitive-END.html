@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+    <head>
+        <title>L13 - Camera Primitive</title>
+        <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+    </head>
+    <body>
+        <a-scene>
+            <!-- Asset Management System -->
+            <a-assets>
+                <img id="floor" src="L13-IMGs/floor-1024.jpg">
+                <img id="average-height" src="L13-IMGs/average-height.png">
+            </a-assets>
+            
+            <!-- Ground -->
+            <a-plane src="#floor" shader="flat" rotation="-90 0 0" scale="5 5 1">
+            </a-plane>
+            
+            <!-- Cylinder -->
+            <a-cylinder color="#AA0000" radius="0.5" height="2" position="-2 1 0">
+            </a-cylinder>
+            
+            <!-- Box -->
+            <a-box color="#00AA00" height="2" depth="4" position="2 1 0">
+            </a-box>
+            
+            <!-- Average Height | Human Eye Level -->
+            <a-image src="#average-height" scale="2 2 1" position="0 1 0">
+            </a-image>
+            
+            <!-- Camera -->
+            <!-- Origin at 0 0 0 in VR mode -->
+            <!-- Origin at 0 1.6 0 in Desktop mode -->
+            <!-- Average Height | Adult Eye Level -->
+            <a-entity position="0 0 5">
+                <a-camera user-height="1.6"
+                          active="false">
+                </a-camera>
+            </a-entity>
+            
+            <!-- Average Height | Kid Eye Level -->
+            <a-entity position="0 0 5">
+                <a-camera user-height="0.9"
+                          active="true">
+                </a-camera>
+            </a-entity>
+            
+            <!-- Aerial Camera -->
+            <a-entity position="0 5 5">
+                <a-camera active="false">
+                </a-camera>
+            </a-entity>
+        </a-scene>
+    </body>
+</html>

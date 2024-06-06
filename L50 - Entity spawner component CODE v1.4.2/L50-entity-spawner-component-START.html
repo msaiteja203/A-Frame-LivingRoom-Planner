@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+	<title>Entity spawner component</title>
+	<script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+	<script src="L50-JS/L50-javascript-START.js"></script>
+</head>
+
+<body>
+	<a-scene>
+		<!-- Camera Rig -->
+		<a-entity position="0 0 8">
+			<!-- Camera -->
+			<a-camera id="cam" look-controls="pointerLockEnabled: true">
+				<a-cursor></a-cursor>
+			</a-camera>
+		</a-entity>
+		
+		<!-- Ground -->
+		<a-plane color="#484848" shader="flat" rotation="-90 0 0" scale="6 4 1">
+		</a-plane>
+		
+		<!-- Cylinder -->
+		<a-cylinder color="#FFAA00" radius="0.5" position="0 0.5 0">
+		</a-cylinder>
+	</a-scene>
+</body>
+</html>

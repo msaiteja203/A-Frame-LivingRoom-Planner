@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>On-rail locomotion</title>
+    <!-- Animation is working upto 1.2 version only (when we click on object it is not moving toward the object) -->
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.2/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/super-hands@2.1.0/dist/super-hands.min.js"></script>
+    <script src="https://unpkg.com/aframe-look-at-component@0.5.1/dist/aframe-look-at-component.min.js"></script>
+</head>
+
+<body>
+    <a-scene background="color:#FFFFFF">
+        <a-assets>
+            <img src="../L39 - On-rails locomotion CODE v1.4.2/L39-ASSETs/footsteps.png" id="footsteps">
+            <img src="../L38 - Dynamic FOV reduction CODE v1.4.2/L38-ASSETs/vignette.png" alt="img" id="vignette">
+        </a-assets>
+
+        <a-entity id="cam-rig" movement-controls="controls: checkpoint" checkpoint-controls="mode:animate">
+            <a-entity progressive-controls></a-entity>
+        </a-entity>
+        <!-- Ground -->
+        <a-plane color="#DDDDDD" shader="flat" rotation="-90 0 0" scale="10 40 1"></a-plane>
+
+        <a-box color="#00AAFF" position="-3 0.5 -16"></a-box>
+        <!-- checkpoint ui -->
+        <a-image src="#footsteps" position="-3 2.5 -16" checkpoint="offset:1 -2.5 0" look-at="#cam-rig"></a-image>
+        <a-box color="#00AA00" position="3 0.5 -16"></a-box>
+        <!-- checkpoint ui -->
+        <a-image src="#footsteps" position="3 2.5 -16" checkpoint="offset:-1 -2.5 0" look-at="#cam-rig"></a-image>
+        <a-box color="#FFAA00" position="-3 0.5 -8"></a-box>
+        <!-- checkpoint ui -->
+        <a-image src="#footsteps" position="-3 2.5 -8" checkpoint="offset:1 -2.5 0" look-at="#cam-rig"></a-image>
+        <a-box color="#AA0000" position="3 0.5 -8"></a-box>
+        <!-- checkpoint ui -->
+        <a-image src="#footsteps" position="3 2.5 -8" checkpoint="offset:-1 -2.5 0" look-at="#cam-rig"></a-image>
+    </a-scene>
+</body>
+
+</html>

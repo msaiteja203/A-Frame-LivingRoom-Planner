@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+</head>
+
+<body>
+    <a-scene>
+        <a-entity camera look-controls position ="0 1.6 0"></a-entity>
+
+        <a-entity id="wall" geometry="primitive:box; width:6; height:3; depth:0.1" material="color:brown" position="0 1.5 -5"></a-entity>
+            <!-- object 1 -->
+            <a-box class="sticky" position="0.5 1.5 -5.05" color="black" width="1" height="1" depth="1"></a-box>
+            <a-sphere class="sticky" position="0.5 1.5 -5.05" color="blue" radius="0.1"></a-sphere>
+
+            <script>
+                AFrame.registerComponent('sticky', {
+                    init:function(){
+
+                        //reference to wall
+                        var wall = document.querySelector("#wall");
+                        //set initial position
+                        var initialPosition = this.el.getAttribute('position');
+                        var wallPosition = wall.getAttribute('position');
+                        this.el.setAttribute('position', {
+                            x: wallPosition.x + initialPosition.x,
+                            y: wallPosition.y + initialPosition.y,
+                            z: wallPosition.z + initialPosition.z
+                        });
+
+                        //make object face the wall
+                        this.el.setAttribute('look-at', '[camera]');
+                    }
+                });
+            </script>
+    </a-scene>
+</body>
+
+</html>

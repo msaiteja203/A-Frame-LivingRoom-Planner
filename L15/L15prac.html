@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   <!--  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script> -->
+   <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+
+
+</head>
+
+<body>
+    <a-scene>
+        <a-assets>
+            <img id="floor" src="./L15 - Animating objects CODE v1.4.2/L15-IMGs/floor-1024.jpg"></img>
+        </a-assets>
+
+        <a-plane src="#floor" shader="flat" rotation="-90 0 0" scale="5 5 1">
+        </a-plane>
+
+        <!-- Camera -->
+        <a-entity position="0 0 8">
+            <a-camera></a-camera>
+        </a-entity>
+
+        <!-- Rotating Box -->
+        <a-box color="#AA0000" position="0 0.5 0">
+            <a-animation attribute="rotation" to="0 360 0 " repeat="indifinite" dur="5000" easing="linear">
+            </a-animation>
+        </a-box>
+        <a-entity position="0 0 8">
+            <a-camera></a-camera>
+        </a-entity>
+
+       
+       <!--  </a-cone> -->
+    </a-scene>
+</body>
+
+</html>

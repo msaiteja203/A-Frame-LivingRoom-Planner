@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+    <title>L15 - Animating objects</title>
+    <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+</head>
+
+<body>
+    <a-scene>
+        <!-- Asset Management System -->
+        <a-assets>
+            <img id="floor" src="L15-IMGs/floor-1024.jpg">
+        </a-assets>
+
+        <!-- Ground -->
+        <a-plane src="#floor" shader="flat" rotation="-90 0 0" scale="5 5 1">
+        </a-plane>
+
+        <!-- Camera -->
+        <a-entity position="0 0 8">
+            <a-camera></a-camera>
+        </a-entity>
+    </a-scene>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+	<title>On-rails locomotion</title>
+	<script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+	<script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.2/dist/aframe-extras.min.js"></script>
+	<script src="https://unpkg.com/super-hands@2.1.0/dist/super-hands.min.js"></script>
+	<script src="https://unpkg.com/aframe-look-at-component@0.5.1/dist/aframe-look-at-component.min.js"></script>
+</head>
+
+<body>
+	<a-scene background="color: #FFFFFF">
+		<!-- Asset Management System -->
+		<a-assets>
+			<img id="footsteps" src="L39-ASSETs/footsteps.png">
+		</a-assets>
+		
+		<!-- Camera Rig -->
+		<a-entity movement-controls="speed: 0.15">
+			<!-- Progressive Controls -->
+			<a-entity progressive-controls></a-entity>
+		</a-entity>
+
+		<!-- Ground -->
+		<a-plane color="#DDDDDD" shader="flat" rotation="-90 0 0" scale="10 40 1">
+		</a-plane>
+
+		<!-- Blue Box -->
+		<a-box color="#00AAFF" position="-3 0.5 -16"></a-box>
+
+		<!-- Green Box -->
+		<a-box color="#00AA00" position="3 0.5 -16"></a-box>
+		
+		<!-- Yellow Box -->
+		<a-box color="#FFAA00" position="-3 0.5 -8"></a-box>
+		
+		<!-- Red Box -->
+		<a-box color="#AA0000" position="3 0.5 -8"></a-box>
+	</a-scene>
+</body>
+</html>

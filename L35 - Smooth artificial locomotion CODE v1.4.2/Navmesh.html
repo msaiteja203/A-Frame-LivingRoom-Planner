@@ -1,0 +1,39 @@
+<html>
+    <head>
+        <title>Class-37 Navigation Meshes</title>
+        <!-- A navigation Mesh helps AI agents navigate, and is one way of constraining first-person controls and VR teleportation within a playable areas. For information about using a navigation mesh in A-frame  -->
+        <!-- <script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script> -->
+        <script src="http://aframe.io/releases/1.0.0/aframe.min.js"></script>
+        <!-- Distallation -->
+        <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.2/dist/aframe-extras.min.js"></script>
+        <!-- installing the inspector plugin -->
+        <script src="https://recast-api.donmccurdy.com/aframe-inspector-plugin-recast.js"></script>
+    </head>
+    <body>
+        <a-scene background="color: #FFFFFF" inspector-plugin-recast>
+ 
+            <!-- Assets management System -->
+            <a-assets-item id="my-nav-mesh" src="../L37 - Navigation Meshes CODE v1.4.2/L37-ASSETs/navmesh.gltf"></a-assets-item>
+ 
+            <!-- Camera Rig -->
+            <a-entity movement-controls="speed: 0.15; constrainToNavMesh: true" position="0 0 2">
+                <!-- Camera -->
+                <a-entity camera position="0 1.6 1" look-controls="pointerLockEnabled: true" >
+                    <a-cursor></a-cursor>
+                </a-entity>
+            </a-entity>
+ 
+            <!-- Ground -->
+            <a-plane color="#333333" shader="flat" rotation="-90 0 0" scale="8 6 1"></a-plane>
+ 
+            <!-- Navigation Mesh -->
+           <!--  <a-entity gltf-model="#my-nav-mesh" nav-mesh position="0 -0.1 0" visible="false"></a-entity> -->
+ 
+            <!-- Cylinder -->
+            <a-cylinder color="#AA0000" radius="0.5" position="1.5 0.5 0" keypress></a-cylinder>
+ 
+            <!-- Box -->
+            <a-box color="#00AA00" width=" 0.5" depth="3" position="-1.5 0.5 0"></a-box>
+        </a-scene>
+    </body>
+</html>

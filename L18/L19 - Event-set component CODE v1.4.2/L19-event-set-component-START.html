@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+	<title>L19 - Event-set component</title>
+	<script src="https://aframe.io/releases/0.7.1/aframe.min.js"></script>
+	<script src="https://unpkg.com/aframe-event-set-component@^4.0.0/dist/aframe-event-set-component.min.js"></script>
+</head>
+
+<body>
+	<a-scene>
+		<!-- Camera -->
+		<a-camera>
+			<a-entity cursor position="0 0 -1"
+					  geometry="primitive: sphere; radius: 0.005"
+					  material="color: #000000; shader: flat; opacity: 0.5">
+			</a-entity>
+		</a-camera>
+
+		<!-- Left Red Box -->
+		<a-box color="#AA0000" position="-2 0 -7">
+		</a-box>
+		<!-- Green Box -->
+		<a-box id="green" color="#00AA00" position="-2 3 -7">
+		</a-box>
+
+		<!-- Center Red Box -->
+		<a-box color="#AA0000" position="0 0 -7">
+		</a-box>
+		<!-- Blue Box -->
+		<a-box id="blue" color="#0000AA" position="0 3 -7">
+		</a-box>
+
+		<!-- Right Red Box -->
+		<a-box color="#AA0000" position="2 0 -7">
+		</a-box>
+		<!-- Yellow Box -->
+		<a-box id="yellow" color="#FFAA00" position="2 3 -7">
+		</a-box>
+	</a-scene>
+</body>
+</html>

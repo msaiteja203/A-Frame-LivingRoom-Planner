@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+    <head>
+        <title>L24 - Physics and collisions DESKTOP</title>
+        <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+        <!-- ******** NEW EVENT-SET COMPONENT VERSION FOR A-FRAME v1.4.2 ******** -->
+        <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+        <!-- ******** NEW SUPER-HANDS COMPONENT VERSION FOR A-FRAME v1.4.2 ******** -->
+        <script src="https://unpkg.com/super-hands@3.0.3/dist/super-hands.min.js"></script>
+        <!-- ******** THE PHYSICS SYYSTEM HAS BEEN ORGANISED IN A SPECIFIC COMPONENT (no more aframe-extras) ******** -->
+        <!-- ******** You can find out more visiting the repo here: https://github.com/c-frame/aframe-physics-system ******** -->
+        <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.1.0/dist/aframe-physics-system.js"></script>
+        <!-- ******** THIS CUSTOM COMPONENT ALLOWS THE MOUSE AND TOUCH TO INTERACT WITH OBJECTS DIRECTLY ******** -->
+        <script>
+          AFRAME.registerComponent('capture-mouse', {
+            init: function () {
+              this.eventRepeater = this.eventRepeater.bind(this)
+              this.el.sceneEl.addEventListener('loaded', () => {
+                this.el.sceneEl.canvas.addEventListener('mousedown', this.eventRepeater)
+                this.el.sceneEl.canvas.addEventListener('mouseup', this.eventRepeater)
+                this.el.sceneEl.canvas.addEventListener('touchstart', this.eventRepeater)
+                this.el.sceneEl.canvas.addEventListener('touchmove', this.eventRepeater)
+                this.el.sceneEl.canvas.addEventListener('touchend', this.eventRepeater)
+              }, {once: true})
+            },
+            eventRepeater: function (evt) {
+              if (evt.type.startsWith('touch')) {
+                evt.preventDefault()
+                // avoid repeating touchmove because it interferes with look-controls
+                if (evt.type === 'touchmove') { return }
+              }
+              this.el.emit(evt.type, evt.detail)
+            }
+          })
+        </script>
+        <!-- ******** WE ARE NOT USING THE DEPRECATED progressive-controls COMPONENT ******** -->
+    </head>
+
+    <body>
+        <!-- ******** For the code related to the physics and the event-set component, NOTHING HAS CHANGED WITH v1.4.2 ******** -->
+        <!-- ******** For the code related to the animation, SOME THINGS HAVE CHANGED WITH v1.4.2 ******** -->
+        <!-- The <a-animation> system was dismissed with the v0.9.0 release,
+             and since then A-Frame started including the "animation" component
+             in its core default components, so there is no more need to install
+             any script to use it (line 65).
+             You can learn more about the "animation" component in Section 7
+             Lecture 31 "Animation component. Moreover, since some of the properties
+             come with different names, you can find all their names and values
+             on the official A-Frame documentation at this link:
+             https://aframe.io/docs/1.0.0/components/animation.html -->
+        <a-scene physics="gravity: -9.8; restitution: 0.7">
+
+            <!-- Assets Management System -->
+            <a-assets>
+                <img id="ground" src="L24-ASSETs/floor-1024.jpg">
+            </a-assets>
+            
+            <!-- Camera -->
+            <a-entity camera look-controls wasd-controls position="0 1 1"
+                      capture-mouse
+                      raycaster="objects: .clickable" cursor="rayOrigin: mouse"
+                      body="type: static; shape: sphere; sphereRadius: 0.001"
+                      super-hands="colliderEvent: raycaster-intersection;
+                                  colliderEventProperty: els;
+                                  colliderEndEvent:raycaster-intersection-cleared;
+                                  colliderEndEventProperty: clearedEls;">
+            </a-entity>
+
+            <!-- Ground -->
+            <a-plane src="#ground" scale="50 50 1" repeat="5 5 1" rotation="-90 0 0"
+                     static-body>
+            </a-plane>
+
+            <!-- Red Box -->
+            <a-box color="#AA0000" position="-3.5 0.5 -4">
+                <a-box color="#AA0000" visible="false" scale="2 3 1.5" position="0 1 0" class="clickable"
+                       static-body>
+                </a-box>
+            </a-box>
+
+            <!-- Green Sphere -->
+            <a-sphere color="#00AA00" radius="0.5" position="-1 4 -4" class="clickable" grabbable
+                      dynamic-body="linearDamping: 0.05; mass: 1">
+            </a-sphere>
+
+            <!-- Yellow Sphere -->
+            <a-sphere color="#FFAA00" radius="0.5" position="1 4 -4" class="clickable" grabbable
+                      dynamic-body="linearDamping: 0.5; angularDamping: 0.3; mass: 10">
+            </a-sphere>
+
+            <!-- Blue Box -->
+            <a-box color="#00AAFF" position="3.5 2 -4"
+                   static-body="shape: sphere; sphereRadius: 1"
+                   event-set__color="_event: collide; material.color: #0055AA"
+                   animation="property: rotation; to: 0 360 0; loop: true; dur: 3000">
+            </a-box>
+
+        </a-scene>
+    </body>
+</html>

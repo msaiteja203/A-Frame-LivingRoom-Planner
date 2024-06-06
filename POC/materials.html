@@ -1,0 +1,89 @@
+<!-- <!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Apply Material to glTF Model in A-Frame</title>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+</head>
+
+<body>
+    <a-scene>
+        <a-assets>
+            <a-asset-item id="chair" src="../Props/Chair.glb"></a-asset-item>
+        </a-assets> -->
+        <!-- Camera and lighting -->
+        <!-- <a-entity camera look-controls position="0 1.6 0">
+            <a-cursor></a-cursor>
+        </a-entity>
+        <a-light type="ambient" color="#888"></a-light>
+        <a-light type="directional" color="#fff" intensity="0.5" position="0 1 0"></a-light>
+ -->
+        <!-- Add the glTF model with a custom material -->
+       <!--  <a-entity gltf-model="#chair" position="1 2 -3"  material="color: red; metalness: 0.5; roughness: 0.1"
+        event-set__enter="_event: mouseenter; opacity:0.5"
+        event-set__leave="_event: mouseleave; material.color: #333333; opacity: 1"
+            scale="1 1 1">
+        </a-entity> -->
+
+        <!-- Assets management for your glTF model -->
+       
+<!--     </a-scene>
+</body>
+
+</html> -->
+
+<!-- <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Change GLTF Material on Click in A-Frame</title>
+<script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+        <a-assets>
+            <a-asset-item id="my-gltf-model" src="../Props/Chair.glb"></a-asset-item>
+          </a-assets> -->
+      <!-- Load the glTF model -->
+     <!--  <a-entity id="my-model" gltf-model="#my-gltf-model" position="0 1.6 -3"></a-entity>
+      <a-camera position="0 1.6 0">
+        <a-cursor cursor="rayOrigin: mouse" raycaster="object: .interaction"></a-cursor>
+    </a-camera>  -->
+      <!-- Camera and lights for better visibility -->
+      <a-entity light="type: ambient; color: #BBB"></a-entity>
+      <a-entity light="type: directional; color: #FFF; intensity: 0.5" position="-1 2 1"></a-entity>
+      <a-camera position="0 1.6 0"></a-camera>
+ 
+      <!-- Asset Management System -->
+     
+    </a-scene>
+ 
+    <script>
+      // Function to change the material of the model
+
+      /* function changeMaterial(model, color, metalness, roughness) {
+        model.traverse(function(node) {
+          if (node.isMesh) {
+            node.material.color.set(color); // Change the color
+            node.material.metalness = metalness; // Change metalness
+            node.material.roughness = roughness; // Change roughness
+          }
+        });
+      } */
+ 
+      // Wait for the model to load
+      const myModelEntity = document.querySelector('#my-model');
+      myModelEntity.addEventListener('model-loaded', function(event) {
+        console.log("Model loadeddddd")
+        const model = event.detail.model;
+ 
+        // Add click event listener to change material on click
+        myModelEntity.addEventListener('click', function() {
+            console.log("hi Aframe")
+         /*  changeMaterial(model, 'black', 0.8, 0.2);  */// Example: change to blue with different properties
+        });
+      });
+    </script>
+  </body>
+</html>

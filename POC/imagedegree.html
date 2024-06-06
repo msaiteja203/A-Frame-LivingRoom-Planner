@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>L25-PartB-360degree-image</title>
+        <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+    </head>
+    <body>
+        <a-scene>
+            <!-- 360 deg panorama -->
+            <a-assets>
+                <img id="park-ambiance" src="" />
+                <audio id="park" src="/Section-6-Enhancing the Virtual Environment/cardinal-37075.mp3"></audio>
+            </a-assets>
+ 
+            <!-- Camera -->
+            <a-entity position="0 0 7">
+                <a-camera>
+                    <a-cursor></a-cursor>
+                </a-camera>
+            </a-entity>
+ 
+            <!-- Sky -->
+            <a-sky src="#park-ambiance"
+                   sound="src: #park; autoplay: true; loop: true; positional: false ">
+            </a-sky>
+        </a-scene>
+    </body>
+</html>

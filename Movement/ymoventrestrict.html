@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Move GLTF Model with Cursor</title>
+    <meta charset="utf-8">
+<script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <!-- Camera and cursor for user interaction -->
+      <a-entity camera look-controls>
+        <a-cursor color="#FF0000"></a-cursor> <!-- Red cursor for visibility -->
+      </a-entity>
+
+      <a-assets>
+        <a-asset-item id="chair" src="../Props/Sofa.glb"></a-asset-item>
+      </a-assets>
+ 
+      <!-- Ground plane for cursor intersection -->
+      <a-plane id="ground" position="0 0 -5" rotation="-90 0 0" width="10" height="10" color="#7BC8A4"></a-plane>
+ 
+      <!-- GLTF model with custom component for cursor-based movement -->
+      <a-entity scale="2 2 2" id="gltfModel" gltf-model="#chair" position="0 0 0" cursor-movement></a-entity>
+ 
+      <!-- Sky background -->
+      <a-sky color="#ECECEC"></a-sky>
+    </a-scene>
+ 
+    <script>
+      // Register a custom component to move the model based on cursor intersection
+      AFRAME.registerComponent('cursor-movement', {
+        schema: {
+          restrictedY: { type: 'number', default: 0 }  // Restrict movement to this Y value
+        },
+        init: function () {
+          var el = this.el;
+ 
+          el.addEventListener('click', function (evt) {
+            // Get the intersection point
+            var intersection = evt.detail.intersection;
+            if (intersection) {
+              var point = intersection.point;
+ 
+              // Move the GLTF model to the intersection point
+              el.setAttribute('position', { x: point.x, y: el.components['cursor-movement'].data.restrictedY, z: point.z });
+ 
+              // Debugging: Log the intersection point
+              console.log('Intersection point:', point);
+              console.log('New Position:', { x: point.x, y: el.components['cursor-movement'].data.restrictedY, z: point.z });
+            }
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

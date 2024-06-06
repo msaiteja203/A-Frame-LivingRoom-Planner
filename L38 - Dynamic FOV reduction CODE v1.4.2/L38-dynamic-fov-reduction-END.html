@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+	<title>Dynamic FOV reduction</title>
+	<script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+	<script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.2/dist/aframe-extras.min.js"></script>
+	<script src="https://unpkg.com/super-hands@2.1.0/dist/super-hands.min.js"></script>
+	<script src="https://unpkg.com/aframe-event-set-component@^4.0.0/dist/aframe-event-set-component.min.js"></script>
+	<script src="https://unpkg.com/aframe-animation-component@^4.1.2/dist/aframe-animation-component.min.js"></script>
+</head>
+
+<body>
+	<a-scene background="color: #FFFFFF">
+		<!-- Asset Management System -->
+		<a-assets>
+			<img id="vignette" src="L38-ASSETs/vignette.png">
+		</a-assets>
+		
+		<!-- Camera Rig -->
+		<a-entity movement-controls="speed: 0.15"
+				  event-set__start="_target: #dyn-fov-red; _event: trackpadtouchstart;
+		 							animation.property: opacity;
+		 							animation.to: 1;
+			 						animation.dur: 300;
+			 						animation.easing: easeOutQuad"
+		 		  event-set__end="_target: #dyn-fov-red; _event: trackpadtouchend;
+		 		  				  animation.to: 0">
+			<!-- Camera -->
+			<a-entity progressive-controls>
+				<a-camera>
+					<a-image id="dyn-fov-red" src="#vignette" position="0 0 -0.3" opacity="0">
+					</a-image>
+				</a-camera>
+			</a-entity>
+		</a-entity>
+
+		<!-- Ground -->
+		<a-plane color="#DDDDDD" shader="flat" rotation="-90 0 0" scale="10 40 1">
+		</a-plane>
+
+		<!-- Cylinders -->
+		<a-cylinder color="#FF7700" radius="0.1" position="1 0.5 -3"></a-cylinder>
+		<a-cylinder color="#FF7700" radius="0.1" position="1 0.5 -6"></a-cylinder>
+		<a-cylinder color="#FF7700" radius="0.1" position="1 0.5 -9"></a-cylinder>
+		<a-cylinder color="#FF7700" radius="0.1" position="-1 0.5 -3"></a-cylinder>
+		<a-cylinder color="#FF7700" radius="0.1" position="-1 0.5 -6"></a-cylinder>
+		<a-cylinder color="#FF7700" radius="0.1" position="-1 0.5 -9"></a-cylinder>
+	</a-scene>
+</body>
+</html>

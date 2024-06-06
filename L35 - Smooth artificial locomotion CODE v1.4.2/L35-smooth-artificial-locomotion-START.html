@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+	<title>Smooth artificial locomotion</title>
+	<script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+</head>
+
+<body>
+	<a-scene>
+		<!-- Camera Rig -->
+		<a-entity position="0 0 6">
+			<!-- Camera -->
+			<a-camera>
+				<a-cursor></a-cursor>
+			</a-camera>
+		</a-entity>
+		
+		<!-- Ground -->
+		<a-plane color="#DDDDDD" shader="flat" rotation="-90 0 0" scale="8 4 1">
+		</a-plane>
+
+		<!-- Cylinder -->
+		<!-- IMPORTANT: In the video you will see a "keypress" attribute attached to this entity -->
+		<!-- Please ignore it, as it is just a leftover from another scene and I forgot to delete it! -->
+		<a-cylinder color="#AA0000" radius="0.5" position="1.5 0.5 0">
+		</a-cylinder>
+
+		<!-- Box -->
+		<a-box color="#00AA00" width="0.5" depth="3" position="-1.5 0.5 0">
+		</a-box>
+	</a-scene>
+</body>
+</html>

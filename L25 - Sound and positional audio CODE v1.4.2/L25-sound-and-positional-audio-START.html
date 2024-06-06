@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+    <title>L25 - Sound and positionsal audio</title>
+    <script src="https://aframe.io/releases/0.7.1/aframe.min.js"></script>
+</head>
+	
+<body>
+    <a-scene>
+        <!-- Asset Management System -->
+        <!-- DOWNLOAD, PRELOAD YOUR AUDIO FILES, AND UPDATE THEIR FILE NAMES IN THIS DOC -->
+        <a-assets>
+        	<img id="ground" src="L25-ASSETs/floor-1024.jpg">
+        </a-assets>
+		
+		<!-- Camera -->
+		<a-entity position="0 0 7">
+			<a-camera>
+				<a-cursor></a-cursor>
+			</a-camera>
+		</a-entity>
+
+        <!-- Ground -->
+        <a-plane src="#ground" scale="40 40 1" repeat="2 2" rotation="-90 0 0">
+        </a-plane>
+
+        <!-- Blue Cylinder -->
+        <a-cylinder color="#0088FF" height="5" position="-2 2.5 0">
+        </a-cylinder>
+
+        <!-- Yellow Box with Play and Stop Controls -->
+        <a-box id="yellow" color="#FFAA00" position="1.5 0.5 0.5">
+			<!-- Play -->
+			<a-sphere color="#00AA00" radius="0.25" position="-0.5 1 0"></a-sphere>
+			<!-- Stop -->
+			<a-sphere color="#AA0000" radius="0.25" position="0.5 1 0"></a-sphere>
+        </a-box>
+    </a-scene>
+</body>
+</html>

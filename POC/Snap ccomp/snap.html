@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Change Position of glTF Model Dynamically in A-Frame</title>
+    <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+   
+ 
+    <!-- To work on Events -->
+    <script src="https://unpkg.com/aframe-event-set-component@^4.0.0/dist/aframe-event-set-component.min.js"></script>
+   
+    <!-- If we want to use Physics in our project we need to add this script -->
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-physics-system@v4.0.0/dist/aframe-physics-system.js"></script>
+ 
+    <script src="https://unpkg.com/super-hands@2.0.2/dist/super-hands.min.js"></script>
+    <script src="https://unpkg.com/aframe-draggable-component#3.0.1/dist/aframe-draggable-component.mim.js"></script>
+ 
+
+  </head>
+  <body>
+    <a-scene>
+      <!-- Camera and lighting -->
+      <a-entity camera look-controls position="0 1.6 0"></a-entity>
+      <a-light type="ambient" color="#888"></a-light>
+      <a-light type="directional" color="#fff" intensity="0.5" position="0 1 0"></a-light>
+ 
+      <!-- Add the glTF model with an initial position -->
+      <a-entity
+        id="myModel"
+        gltf-model="#model"
+        position="1 2 -3"
+        scale="1 1 1">
+      </a-entity>
+ 
+      <!-- Assets management for your glTF model -->
+      <a-assets>
+        <a-asset-item id="model" src="../Props/Chair.glb"></a-asset-item>
+      </a-assets>
+    </a-scene>
+ 
+    <a-entity
+    id="myModel"
+    gltf-model="#model"
+    position="1 2 -3"
+    scale="1 1 1">
+  </a-entity>
+    <!-- Add a button to trigger the position change -->
+    <button id="changePositionButton">Change Position</button>
+ 
+    <script>
+      // Wait for the scene to load
+      document.addEventListener('DOMContentLoaded', function() {
+        // Select the model entity and the button
+        const model = document.querySelector('#myModel');
+        const button = document.querySelector('#changePositionButton');
+        
+        // Add an event listener to the button to change the position of the model
+        button.addEventListener('click', () => {
+          model.setAttribute('position', {x: 2, y: 1, z: -5});
+        });
+      });
+    </script>
+  </body>
+</html>
+has context menu
+
+
+has context menu

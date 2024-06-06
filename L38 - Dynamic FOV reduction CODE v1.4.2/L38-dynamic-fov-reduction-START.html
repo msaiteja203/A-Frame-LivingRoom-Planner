@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+	<title>Dynamic FOV reduction</title>
+	<script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+	<script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.2/dist/aframe-extras.min.js"></script>
+	<script src="https://unpkg.com/super-hands@2.1.0/dist/super-hands.min.js"></script>
+	<script src="https://unpkg.com/aframe-event-set-component@^4.0.0/dist/aframe-event-set-component.min.js"></script>
+	<script src="https://unpkg.com/aframe-animation-component@^4.1.2/dist/aframe-animation-component.min.js"></script>
+</head>
+
+<body>
+	<a-scene background="color: #FFFFFF">
+		<!-- Camera Rig -->
+		<a-entity movement-controls="speed: 0.15">
+			<!-- Camera -->
+			<a-entity camera position="0 1.6 0"
+					  look-controls="pointerLockEnabled: true">
+				<a-cursor></a-cursor>
+			</a-entity>
+		</a-entity>
+
+		<!-- Ground -->
+		<a-plane color="#DDDDDD" shader="flat" rotation="-90 0 0" scale="10 40 1">
+		</a-plane>
+
+		<!-- Cylinders -->
+		<a-cylinder color="#FF7700" radius="0.1" position="1 0.5 -3"></a-cylinder>
+		<a-cylinder color="#FF7700" radius="0.1" position="1 0.5 -6"></a-cylinder>
+		<a-cylinder color="#FF7700" radius="0.1" position="1 0.5 -9"></a-cylinder>
+		<a-cylinder color="#FF7700" radius="0.1" position="-1 0.5 -3"></a-cylinder>
+		<a-cylinder color="#FF7700" radius="0.1" position="-1 0.5 -6"></a-cylinder>
+		<a-cylinder color="#FF7700" radius="0.1" position="-1 0.5 -9"></a-cylinder>
+	</a-scene>
+</body>
+</html>

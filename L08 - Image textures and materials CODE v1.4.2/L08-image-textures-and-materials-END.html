@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+    <head>
+        <title>L08 - Image textures and materials</title>
+        <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+    </head>
+	<!-- I cannot redistribute the image textures because of the textures.com Terms Of Use -->
+    <!-- You can download them for free at the below links -->
+	<!-- Metal plates texture (Albedo and Normal maps) -->
+	<!-- https://www.textures.com/download/pbr0018/133054?q=metal -->
+	<!-- Bricks texture (Albedo and Normal maps) -->
+	<!-- https://www.textures.com/download/pbr0071/133106?q=bricks -->
+    <body>
+        <a-scene>
+            <!-- Asset Management System -->
+            <a-assets>
+                <img id="metal-NRM" src="L08-IMGs/metal-1024-NRM.jpg">
+                <img id="brick" src="L08-IMGs/brick-1024.jpg">
+                <img id="brick-NRM" src="L08-IMGs/brick-1024-NRM.jpg">
+            </a-assets>
+            
+            <!-- Light-Blue Box > Metal Room -->
+            <a-box color="#FFFFFF"
+                   src="L08-IMGs/metal-1024.jpg"
+                   repeat="1 1"
+                   normal-map="#metal-NRM"
+                   normal-texture-repeat="1 1"
+                   normal-scale="1 -1"
+                   roughness="0.5"
+                   width="4" height="4" depth="4"
+                   position="-2 1.5 -9"
+                   scale="-1 1 1">
+            </a-box>
+            <!-- Brown Box > Brick Room -->
+            <a-box material="color: #FFFFFF;
+                             src: #brick;
+                             repeat: 2 2;
+                             normal-map: #brick-NRM;
+                             normal-texture-repeat: 2 2;
+                             normal-scale: 1 -1;
+                             roughness: 0.9"
+                   width="4" height="4" depth="4"
+                   position="2 1.5 -9"
+                   scale="-1 1 1">
+            </a-box>
+            
+            <!-- Blue Sphere | Standard Material -->
+            <a-sphere material="color: #0000AA;
+                                roughness: 0.2
+                                shader: standard"
+                      radius="0.5"
+                      position="-2 1.5 -8">
+            </a-sphere>
+            <!-- Red Sphere | Flat Material -->
+            <a-sphere material="color: #AA0000;
+                                roughness: 0.2;
+                                shader: flat;
+                                opacity: 0.5"
+                      radius="0.5"
+                      position="2 1.5 -8">
+            </a-sphere>
+        </a-scene>
+    </body>
+</html>

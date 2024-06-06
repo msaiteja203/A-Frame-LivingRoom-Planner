@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+
+</head>
+
+<body>
+    <a-scene>
+        <a-assets>
+            <img id="first" src="L09-IMGs/L09-img-1024x768-flat.jpg">
+            <img id="second" src="L09-IMGs/L09-img-1024x768-curved.jpg">
+            <img id="average-height" src="L13-IMGs/average-height.png">
+        </a-assets>
+        <a-plane material="color=#999999999" rotation="-90 0 0" scale="10000 10000 1" src="#first" repeat="7000 7000"
+            normal-map="#second" normal-texture-repeat=" 5 5"></a-plane>
+            <a-sky src="#second"></a-sky>
+        <a-image src="#average-height"></a-image>
+        <a-entity position="0 0 5">
+            <a-camera user-height="0.9 "></a-camera>
+        </a-entity>
+    </a-scene>
+</body>
+
+</html> 

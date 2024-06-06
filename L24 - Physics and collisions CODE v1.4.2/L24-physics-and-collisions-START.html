@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+    <title>L24 - Physics and collisions</title>
+    <script src="https://aframe.io/releases/0.7.1/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@^4.0.0/dist/aframe-event-set-component.min.js"></script>
+    <script src="https://unpkg.com/super-hands@2.1.0/dist/super-hands.min.js"></script>
+    <script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v3.13.1/dist/aframe-extras.min.js"></script>
+</head>
+<body>
+    <a-scene>
+        
+        <!-- Assets Management System -->
+        <a-assets>
+            <img id="ground" src="L24-ASSETs/floor-1024.jpg">
+        </a-assets>
+        <!-- Progressive Controls -->
+        <a-entity progressive-controls position="0 0 5"></a-entity>
+
+        <!-- Ground -->
+        <a-plane src="#ground" scale="50 50 1" repeat="5 5 1" rotation="-90 0 0">
+        </a-plane>
+
+        <!-- Red Box -->
+        <a-box color="#AA0000" position="-3.5 0.5 -4">
+        </a-box>
+        
+        <!-- Green Sphere -->
+        <a-sphere color="#00AA00" radius="0.5" position="-1 4 -4">
+        </a-sphere>
+        
+        <!-- Yellow Sphere -->
+        <a-sphere color="#FFAA00" radius="0.5" position="1 4 -4">
+        </a-sphere>
+        
+        <!-- Blue Box -->
+        <a-box color="#00AAFF" position="3.5 2 -4">
+        </a-box>
+
+    </a-scene>
+</body>
+</html>

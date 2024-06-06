@@ -1,0 +1,115 @@
+{
+    "asset" : {
+        "generator" : "Khronos glTF Blender I/O v1.8.19",
+        "version" : "2.0"
+    },
+    "scene" : 0,
+    "scenes" : [
+        {
+            "name" : "Scene",
+            "nodes" : [
+                0
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "mesh" : 0,
+            "name" : "Cube.001",
+            "scale" : [
+                2,
+                2.25,
+                3.5
+            ],
+            "translation" : [
+                -2,
+                2.25,
+                0.5
+            ]
+        }
+    ],
+    "materials" : [
+        {
+            "doubleSided" : true,
+            "name" : "Material.003",
+            "pbrMetallicRoughness" : {
+                "baseColorFactor" : [
+                    0,
+                    0.18447458744049072,
+                    1,
+                    1
+                ],
+                "metallicFactor" : 0,
+                "roughnessFactor" : 0.5
+            }
+        }
+    ],
+    "meshes" : [
+        {
+            "name" : "Cube.001",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 0,
+                        "NORMAL" : 1
+                    },
+                    "indices" : 2,
+                    "material" : 0
+                }
+            ]
+        }
+    ],
+    "accessors" : [
+        {
+            "bufferView" : 0,
+            "componentType" : 5126,
+            "count" : 44,
+            "max" : [
+                1,
+                1.0555555820465088,
+                3.000000238418579
+            ],
+            "min" : [
+                -1,
+                -1.0444444417953491,
+                -1.000000238418579
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 1,
+            "componentType" : 5126,
+            "count" : 44,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 2,
+            "componentType" : 5123,
+            "count" : 66,
+            "type" : "SCALAR"
+        }
+    ],
+    "bufferViews" : [
+        {
+            "buffer" : 0,
+            "byteLength" : 528,
+            "byteOffset" : 0
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 528,
+            "byteOffset" : 528
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 132,
+            "byteOffset" : 1056
+        }
+    ],
+    "buffers" : [
+        {
+            "byteLength" : 1188,
+            "uri" : "room.bin"
+        }
+    ]
+}

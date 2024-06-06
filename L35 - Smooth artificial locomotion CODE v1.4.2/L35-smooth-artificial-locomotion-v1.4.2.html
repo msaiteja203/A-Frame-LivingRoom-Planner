@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+	<title>Smooth artificial locomotion</title>
+	<script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+</head>
+
+<body>
+    <!-- ******** SOME THINGS HAVE CHANGED WITH v1.4.2 ******** -->
+	<a-scene vr-mode-ui="enabled: false">
+		<!-- Camera Rig -->
+		<a-entity position="0 0 6">
+			<!-- Camera -->
+            <!-- The "easing" property has been removed from the wasd-controls component (line 17) -->
+			<a-entity camera position="0 1.6 0"
+					  look-controls="pointerLockEnabled: true"
+					  wasd-controls="acceleration: 50">
+				<a-cursor></a-cursor>
+				<!-- Cockpit
+				<a-sphere color="#FFAA00" position="0 -1.1 0"></a-sphere> -->
+			</a-entity>
+		</a-entity>
+		
+		<!-- Ground -->
+		<a-plane color="#DDDDDD" shader="flat" rotation="-90 0 0" scale="8 4 1">
+		</a-plane>
+
+		<!-- Cylinder -->
+		<!-- IMPORTANT: In the video you will see a "keypress" attribute attached to this entity -->
+		<!-- Please ignore it, as it is just a leftover from another scene and I forgot to delete it! -->
+		<a-cylinder color="#AA0000" radius="0.5" position="1.5 0.5 0">
+		</a-cylinder>
+
+		<!-- Box -->
+		<a-box color="#00AA00" width="0.5" depth="3" position="-1.5 0.5 0">
+		</a-box>
+	</a-scene>
+</body>
+</html>

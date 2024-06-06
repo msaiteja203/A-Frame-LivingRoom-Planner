@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+<head>
+	<title>Instant and blink teleportation</title>
+	<script src="https://aframe.io/releases/0.8.2/aframe.min.js"></script>
+	<script src="//cdn.rawgit.com/donmccurdy/aframe-extras/v4.1.2/dist/aframe-extras.min.js"></script>
+	<script src="https://unpkg.com/super-hands@2.1.0/dist/super-hands.min.js"></script>
+	<script src="https://unpkg.com/aframe-look-at-component@0.5.1/dist/aframe-look-at-component.min.js"></script>
+	<script src="https://unpkg.com/aframe-event-set-component@^4.0.0/dist/aframe-event-set-component.min.js"></script>
+	<script src="https://unpkg.com/aframe-animation-component@^4.1.2/dist/aframe-animation-component.min.js"></script>
+</head>
+ 
+<body>
+	<a-scene background="color: #FFFFFF">
+		<!-- Asset Management System -->
+		<a-assets>
+			<img id="footsteps" src="L41-ASSETs/footsteps.png">
+			<img id="black" src="L41-ASSETs/black.png">
+		</a-assets>
+		
+		<!-- Camera Rig -->
+		<a-entity id="cam-rig"
+			  	  movement-controls="controls: checkpoint"
+				  checkpoint-controls="mode: animate">
+			<!-- Progressive Controls -->
+			<a-entity progressive-controls></a-entity>
+		</a-entity>
+
+		<!-- Ground -->
+		<a-plane color="#DDDDDD" shader="flat" rotation="-90 0 0" scale="10 40 1"
+				 position="0 0 -12">
+		</a-plane>
+
+		<!-- Curved Image -->
+        <a-curvedimage src="L41-ASSETs/curved-image.jpg" position="-2 1.5 -24" scale="3 3 3"
+                       theta-length="90" theta-start="135" radius="0.707" height="0.833">
+        </a-curvedimage>
+		<!-- Checkpoint UI -->
+		<a-image src="#footsteps" position="-2 3.5 -24" checkpoint="offset: 0 -3.5 0"
+				 look-at="#cam-rig">
+		</a-image>
+
+		<!-- Purple Box -->
+		<a-box color="#AA00AA" position="2 0.5 -24"></a-box>
+		<!-- Checkpoint UI -->
+		<a-image src="#footsteps" position="2 2.5 -24" checkpoint="offset: -1 -2.5 0"
+				 look-at="#cam-rig">
+		</a-image>
+		
+		<!-- Orange Box -->
+		<a-box color="#FF7700" position="-2 0.5 -8"></a-box>
+		<!-- Checkpoint UI -->
+		<a-image src="#footsteps" position="-2 2.5 -8" checkpoint="offset: 1 -2.5 0"
+				 look-at="#cam-rig">
+		</a-image>
+		
+		<!-- Green Box -->
+		<a-box color="#00AA00" position="2 0.5 -16"></a-box>
+		<!-- Checkpoint UI -->
+		<a-image src="#footsteps" position="2 2.5 -16" checkpoint="offset: -1 -2.5 0"
+				 look-at="#cam-rig">
+		</a-image>
+	</a-scene>
+</body>
+</html>

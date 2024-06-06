@@ -1,0 +1,296 @@
+<html>
+    <head>
+        <title>Practice</title>
+        <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+    </head>
+    <body>
+        <!--script src="http://localhost:9000/build/aframe-master.js"></script-->
+<script src="https://rawgit.com/chenzlabs/aframe/master/dist/aframe-master.js"></script>
+ 
+ 
+<!-- make tracked controllers emit cursor events on down/up events -->
+<script>
+  AFRAME.registerComponent('controller-cursor', {
+    // dependencies: ['cursor'],
+ 
+    // daydream-controller doesn't have a trigger.
+    schema: {
+      downEvents: {type: 'array', default: ['triggerdown', 'trackpaddown', 'thumbstickdown']},
+      upEvents: {type: 'array', default: ['triggerup', 'trackpadup', 'thumbstickup']},
+    },
+ 
+    init: function () {
+      // We want to use controller buttons, so don't fuse.
+      this.el.setAttribute('cursor', 'fuse', false);
+      this.onDown = this.onDown.bind(this);
+      this.onUp = this.onUp.bind(this);
+    },
+ 
+    play: function () {
+      var el = this.el;
+      // Samsung Internet doesn't like ES6 syntax!
+      var self = this;
+      this.data.downEvents.forEach(function (eventName) {
+        el.addEventListener(eventName, self.onDown);
+      });
+      this.data.upEvents.forEach(function (eventName) {
+        el.addEventListener(eventName, self.onUp);
+      });
+    },
+ 
+    pause: function () {
+      var el = this.el;
+      // Samsung Internet doesn't like ES6 syntax!
+      var self = this;
+      this.data.downEvents.forEach(function (eventName) {
+        el.removeEventListener(eventName, self.onDown);
+      });
+      this.data.upEvents.forEach(function (eventName) {
+        el.removeEventListener(eventName, self.onUp);
+      });
+    },
+ 
+    onDown: function (evt) {
+      this.el.components.cursor.onMouseDown();
+    },
+    onUp: function (evt) {
+      this.el.components.cursor.onMouseUp();
+    }
+  });
+</script>
+ 
+<script>
+  AFRAME.registerComponent("controller-model-if-present", {
+    controllerComponents: ['oculus-touch-controls', 'vive-controls', 'daydream-controls', 'gearvr-controls'],
+    schema: { type: 'string' },
+    init: function () {
+      var el = this.el;
+      // install event handler
+      el.addEventListener('controllerconnected', function (evt) {
+        // we've got something, make it visible
+        el.setAttribute('visible', true);
+        // undo hand-model rotation offset
+        el.setAttribute('tracked-controls', 'rotationOffset', 0);
+        el.setAttribute(evt.detail.name, 'rotationOffset', 0);
+        // use controller model
+        el.setAttribute(evt.detail.name, 'model', true);
+        // setAttribute doesn't make model appear, so force
+        evt.detail.component.updateControllerModel();
+      });
+ 
+      // Use various controller components,
+      this.controllerComponents.forEach(function(name) { this.el.setAttribute(name, 'hand', this.data); }.bind(this));
+      // but hide by default.
+      this.el.setAttribute('visible', false);
+    }
+  });
+</script>
+ 
+<script>
+  AFRAME.registerComponent("controller-with-cursor-if-present", {
+    schema: {type: 'string'},
+    init: function() {
+      this.el.setAttribute('controller-model-if-present', this.data);
+ 
+      // Create ray as visible guide for selection.
+      // NOTE: make sure cursor/raycaster won't intersect!
+      var ray = document.createElement('a-box');
+      ray.setAttribute('class', 'not-clickable');
+      ray.setAttribute('width', 0.001);
+      ray.setAttribute('height', 0.001);
+      ray.setAttribute('depth', 100);
+      ray.setAttribute('position', {x:0, y:0, z: -50});
+      ray.setAttribute('color', 'green');
+      ray.setAttribute('opacity', 0.95);
+      this.el.appendChild(ray);
+ 
+      this.el.addEventListener('controllerconnected', function (evt) {
+        // if we had a raycaster, cursor, etc., attach here
+        evt.target.setAttribute('controller-cursor', '');
+        // need to make ray NOT an intersection target for raycaster!
+        evt.target.setAttribute('raycaster', 'interval:100; objects:.clickable');
+ 
+        // Since we have a controller, remove gaze cursor.
+        var cameraCursorEl = document.querySelector('a-camera a-entity[cursor]');
+        if (cameraCursorEl) {
+          cameraCursorEl.parentElement.removeChild(cameraCursorEl);
+        }
+      });
+    }
+  });
+</script>
+ 
+<!-- syntactical sugar for CSS class clickable for entities to be returned by cursor raycasters -->
+<script>
+  AFRAME.registerComponent('selecting', {
+    init: function () {
+      this.oldColor = this.el.getAttribute('material').color;
+      this.el.setAttribute('material','color','#4F4');
+    },
+    remove: function () {
+      if (!this.oldColor) { return; }
+      this.el.setAttribute('material', 'color', this.oldColor);
+    }
+  });
+ 
+  AFRAME.registerComponent('selected', {
+    init: function () {
+      this.oldColor = this.el.getAttribute('material').color;
+      this.el.setAttribute('material','color','#48F');
+    },
+    remove: function () {
+      if (!this.oldColor) { return; }
+      this.el.setAttribute('material', 'color', this.oldColor);
+    }
+  });
+ 
+  AFRAME.registerComponent('clickable', {
+    init: function () { this.el.classList.add('clickable'); },
+    remove: function () { this.el.classList.remove('clickable'); }
+  });
+ 
+  AFRAME.registerComponent('clickbait', {
+    dependencies: ['clickable'],
+   
+    init: function () {
+      var el = this.el;
+      el.addEventListener('mouseenter', function (evt) {
+        console.log('mouseenter ' + JSON.stringify(evt.target.getAttribute('position')));
+        evt.target.removeAttribute('selected');
+        evt.target.setAttribute('selecting', '');
+      });
+     
+      el.addEventListener('mouseleave', function (evt) {
+        console.log('mouseleave ' + JSON.stringify(evt.target.getAttribute('position')));
+        evt.target.removeAttribute('selecting');
+        evt.target.removeAttribute('selected');
+      });
+     
+      el.addEventListener('click', function (evt) {
+        console.log('click ' + JSON.stringify(evt.target.getAttribute('position')));
+        evt.target.removeAttribute('selecting');
+        evt.target.setAttribute('selected', '');        
+      });
+    }
+  });
+</script>
+ 
+<a-scene antialias="true">
+  <a-assets>
+    <a-mixin id="tick" geometry="primitive: box; width: 0.01; height: 0.01; depth: 0.001" material="color: red" text="anchor:left; color:red; width:1; height:1"></a-mixin>
+  </a-assets>
+  <a-sky color="#3CF"></a-sky>
+ 
+  <!-- hand-controls shows gestures being made
+  <a-entity id='left-hand' hand-controls="left"></a-entity>
+  -->
+  <!-- Various controller components show native model -->
+  <a-entity id='left-controller' controller-with-cursor-if-present="left"></a-entity>
+ 
+  <!-- hand-controls shows gestures being made
+  <a-entity id='right-hand' hand-controls="right"></a-entity>
+  -->
+  <!-- Various controller components show native model -->
+  <a-entity id='right-controller' controller-with-cursor-if-present="right"></a-entity>  
+ 
+  <!-- Informational text will be displayed here. -->
+  <a-text align="center" position="0 0 -2" value="I am Gaurav"></a-text>
+ 
+  <!-- Reference tick marks to gauge heights visually from inside VR. -->
+  <a-box mixin="tick" position="0 1.6 -1" text="value:-- 1.6 high"></a-box>
+  <a-box mixin="tick" position="0 1 -1" text="value:-- 1 high"></a-box>
+  <a-box mixin="tick" position="0 0 -1" text="value:-- 0 high"></a-box>
+  <a-box mixin="tick" position="0 -1 -1" text="value:-- -1 high"></a-box>
+  <a-box mixin="tick" position="0 -1.6 -1" text="value:-- -1.6 high"></a-box>
+ 
+  <a-camera>
+    <!-- Gaze cursor. -->
+    <a-entity id="camera-cursor"
+      cursor="fuse:true; fuseTimeout:2000"
+      raycaster="far:20; interval:250; objects:.clickable"
+      geometry="primitive:ring"
+      scale="0.05 0.05 0.05"
+      material="color:blue; shader:flat"
+      position="0 0 -3">
+        <!-- Gaze cursor fuse animations. -->
+        <a-animation begin="mouseleave" easing="ease-in" attribute="scale" dur="100"
+               fill="forwards" from="0.01 0.01 0.01" to="0.05 0.05 0.05"></a-animation>
+        <a-animation begin="click" easing="ease-in" attribute="scale" dur="100"
+               fill="forwards" from="0.05 0.05 0.05" to="0.01 0.01 0.01"></a-animation>
+        <a-animation begin="cursor-fusing" easing="ease-in" attribute="scale" dur="2000"
+               fill="forwards" from="0.05 0.05 0.05" to="0.01 0.01 0.01"></a-animation>
+    </a-entity>
+  </a-camera>
+</a-scene>
+ 
+<script>  
+  var scene = document.querySelector('a-scene');
+ 
+  // Make the floor pattern
+  for (var i=1; i<10; i++) {
+    var plane = document.createElement('a-plane');
+    plane.setAttribute('color', '#484');
+    plane.setAttribute('opacity', 0.05);
+    plane.setAttribute('rotation', '-90 0 0');
+    plane.setAttribute('position', (i*0.5) + ' ' + (0.01 + (i * 0.001)) + ' ' + -(i*0.5));
+    plane.setAttribute('width', i);
+    plane.setAttribute('height', i);
+    scene.appendChild(plane);
+    plane = plane.cloneNode(true);
+    plane.setAttribute('color', '#884');
+    plane.setAttribute('opacity', 0.05);
+    plane.setAttribute('rotation', '-90 0 0');
+    plane.setAttribute('position', -(i*0.5) + ' ' + (0.01 + (i * 0.001)) + ' ' + -(i*0.5));
+    scene.appendChild(plane);
+    plane = plane.cloneNode(true);
+    plane.setAttribute('color', '#844');
+    plane.setAttribute('opacity', 0.05);
+    plane.setAttribute('rotation', '-90 0 0');
+    plane.setAttribute('position', -(i*0.5) + ' ' + (0.01 + (i * 0.001)) + ' ' + (i*0.5));
+    scene.appendChild(plane);
+    plane = plane.cloneNode(true);
+    plane.setAttribute('color', '#444');
+    plane.setAttribute('opacity', 0.05);
+    plane.setAttribute('rotation', '-90 0 0');
+    plane.setAttribute('position', (i*0.5) + ' ' + (0.01 + (i * 0.001)) + ' ' + (i*0.5));
+    scene.appendChild(plane);
+  }
+ 
+  // Make the grid of clickbait boxes
+  for (var x=-5; x<=5; x++) {
+   for (var y=-5; y<=5; y++) {
+    var el = document.createElement('a-box');
+    el.setAttribute('color', '#484');
+    el.setAttribute('position', (x*4) + ' ' + (y*4) + ' ' + -(10));
+    scene.appendChild(el);
+    el.setAttribute('clickbait', '');
+   }
+  }
+</script>
+ 
+<script>
+  var defaultCameraUserHeight;
+  function addRenderStartListener () {
+    document.querySelector('a-scene').addEventListener('renderstart', function (evt) {
+      var cameraEl = evt.detail.target.camera.el;
+      var camera = cameraEl.components.camera;
+     
+      // Remember what the default camera user height was, and put the text there
+      defaultCameraUserHeight = camera.data.userHeight;
+      document.querySelector('a-text').setAttribute('position', 'y', defaultCameraUserHeight);
+     
+      // Periodically compute displayed data
+      setInterval(function () {
+        var controllers = document.querySelector('a-scene').systems['tracked-controls'].controllers;
+        document.querySelector('a-text').setAttribute('value',
+          'Default camera userHeight: ' + defaultCameraUserHeight
+          + '\nCamera position: ' + JSON.stringify(cameraEl.getAttribute('position'))
+          + '\ncontroller 0 button 0 touched: ' + JSON.stringify((controllers && controllers.length > 0) ? controllers[0].buttons[0].touched : undefined)
+        );
+      }, 100);
+    });
+  }
+  addRenderStartListener(); //document.body.addEventListener('DOMContentLoaded', addRenderStartListener);
+</script>
+    </body>
+</html>
